@@ -1,4 +1,4 @@
-window.addEventListener("load", init);
+/*window.addEventListener("load", init);
 
 // global variables
 let canvas, context;
@@ -18,6 +18,7 @@ function init(){
     }
 }
 
+*/
 
 function Ball(x, y, dx, dy, r){
     this.x = x;
@@ -28,11 +29,11 @@ function Ball(x, y, dx, dy, r){
 }
 
 Ball.prototype.run = function(){
-    context.clearRect(0,0,canvas.width,canvas.height);
+    //context.clearRect(0,0,canvas.width,canvas.height);
     this.bounce();
     this.update();   // update location
     this.render();     // render
-    requestAnimationFrame(this.run()); // next cycle
+    //requestAnimationFrame(this.run()); // next cycle
 }
 
 Ball.prototype.render = function(){
