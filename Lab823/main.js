@@ -1,59 +1,62 @@
+window.addEventListener("load", init);
 
-arr1 = random_num(1, 100, 100);
-console.log(arr1);
-console.log(getMean(arr1));
-console.log(getMedian(arr1));
-console.log("Mode: " + getMode(arr1));
-
+// global variables
+let canvas, context;
+let many = []; //makes an array of many balls;
 
 
-function random_num(a, b, n){ //preconditions a<b, n>0
-let arr = [];
-for(let i = 0; i<n; i++){
-    arr[i] = Math.floor(Math.random()*(b-a))+a;
-}
-    return arr;
-}
-
-function getMean(arr){
-    let sum = 0;
-    for(let i = 0; i<arr.length; i++){
-        sum+=arr[i];
+function init(){
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement
+    canvas = document.getElementById("cnv");
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
+    context = canvas.getContext("2d");
+    for(let i = 0; i<500; i++){
+        many[i] = new Ball(Math.random()*canvas.width, Math.random()*canvas.height, (Math.random()*10) + 0.05, (Math.random()*10) + 0.05, 10);
+    } 
+    for(let i = 0; i<many.length; i++){
+        many[i].run; //is this how you call the function?
     }
-    return sum;
-}
-
-function getMedian(arr){
-    let temp = arr.sort();
-    if(arr.length%2 == 0){
-        return (arr[arr.length/2] + arr[arr.length/2+1])/2;
-    }
-    else   
-        return arr[Math.floor(arr.length/2)];
 }
 
 
+function Ball(x, y, dx, dy, r){
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.r = r;
+}
 
-function getMode(arr){ //delete first element of current best?
-    let currentbest = [];
-    let best = 1;
-    let repetition;
-    for(let i = 0; i<arr.length; i++){
-        repetition = 1;
-        for(let j = i+1; j<arr.length; j++){
-            if(arr[i] === arr[j]){
-                repetition++;
-            }
+Ball.prototype.run = function(){
+    context.clearRect(0,0,canvas.width,canvas.height);
+    this.bounce();
+    this.update();   // update location
+    this.render();     // render
+    requestAnimationFrame(this.run()); // next cycle
+}
 
-        }
-        if(repetition>best){
-            currentbest = [];
-            currentbest[0] = arr[i];
-            best = repetition;
-        }
-        else if(repetition==best){
-            currentbest.push(arr[i]);
-        }
+Ball.prototype.render = function(){
+    let radius = this.r; // local variable radius of the circle
+    // create the circle path
+    context.beginPath();    // clear old path
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+    context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+    context.strokeStyle = "black";  // color to fill
+    context.fillStyle = "blue";     // color to stroke
+    context.fill();     // render the fill
+    context.stroke();   // render the stroke
+}
+
+Ball.prototype.update = function(){
+    this.x += this.dx;
+    this.y = this.dy;
+}
+
+Ball.prototype.bounce = function(){
+    if(this.x+this.dx>canvas.width){
+        this.dx = -this.dx;
     }
-    return currentbest;
-} 
+    if(this.y+this.dy>canvas.height){
+        this.dy = -this.dy;
+    }
+}
