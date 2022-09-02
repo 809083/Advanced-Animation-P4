@@ -27,9 +27,16 @@ function Ball(x, y, d) {
   }
   
   Ball.prototype.update = function () {
-
+    this.vel.add(this.acc);
+    this.loc.add(this.vel);
   }
   
   Ball.prototype.bounce = function () {
-
+    if(this.loc.y > canvas.height -this.diam){
+      this.vel.y = -this.vel.y;
+      this.y = canvas.height -1;
+    }
+    if(this.loc.x >canvas.width || this.loc.x <0){
+      this.vel.x = -this.vel.x;
+    }
   }
