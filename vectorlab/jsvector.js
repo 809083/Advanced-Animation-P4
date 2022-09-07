@@ -45,19 +45,19 @@ JSVector.prototype.add = function(v2){
 
 // Subtract another vector from this vector
 JSVector.prototype.sub = function(v2){
-    this.x -= v2.loc.x;
-    this.y -= v2.loc.y;
+    this.x -= v2.x;
+    this.y -= v2.y;
     return this;
 }
 
 // Class method to return a new vector that is the sum of two vectors
 JSVector.addGetNew = function(v1,v2){
-    return new JSVector(v1.loc.x + v2.loc.x, v1.loc.y + v2.loc.y);
+    return new JSVector(v1.x + v2.x, v1.y + v2.y);
 }
 
 // Class method to return a new vector that is the difference of two vectors
 JSVector.subGetNew = function(v1,v2){
-    return new JSVector(v1.loc.x - v2.loc.x, v1.loc.y - v2.loc.y);
+    return new JSVector(v1.x - v2.x, v1.y - v2.y);
 }
 
 // Multiply this vector by a scalar
@@ -89,8 +89,9 @@ JSVector.prototype.limit = function(lim){
 }
 
 // Return the distance between this vector and another one
+//may need more testing for value returned
 JSVector.prototype.distance = function(v2){
-    return Math.sqrt(Math.pow(v2.loc.x-this.x, 2) + Math.pow(v2.loc.y-this.y, 2 ));
+    return Math.sqrt(Math.pow(v2.x-this.x, 2) + Math.pow(v2.y-this.y, 2 ));
 }
 
 // Return the square of the distance between this vector and another one
@@ -103,13 +104,17 @@ JSVector.prototype.distanceSquared = function(v2){
 //                           |  sin   +cos  |
 //learn about rotation matrix
 JSVector.prototype.rotate = function(angle) {
-    this.setDirection(this.getDirection()+angle);
+    /*attempt to use rotation Matrix, more testing needed for val
+    equations source: Wikipedia*/
+    this.x = this.x*Math.cos(angle) - this.y*Math.sin(angle);
+    this.y = this.x*Math.sin(angle) + this.y*Math.cos(angle);
+    //alt attempt: this.setDirection(this.getDirection()+angle);
     return this;
 }
 
 // Return the angle between this vector and another one
 JSVector.prototype.angleBetween = function(v2){
-    return this.getDirection() - v2.loc.getDirection();
+    return this.getDirection() - v2.getDirection();
 }
 
 // Return a copy of this vector
