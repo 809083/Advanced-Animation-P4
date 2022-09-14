@@ -17,6 +17,7 @@ function Mover(x, y, d) {
     this.bounce();
   }
   
+  
   Mover.prototype.render = function () {
     context.beginPath();    // clear old path
     context.arc(this.loc.x, this.loc.y, this.diam, 0, 2 * Math.PI);  //  change x and y to this.loc.x and this.loc.y
@@ -26,9 +27,24 @@ function Mover(x, y, d) {
     context.stroke();   // render the stroke
   }
   
-  Mover.prototype.update = function () {
+Mover.prototype.update = function () {
+    if(this !== attractor){
+      
+      if(this.loc.distance(attractor.loc)<=300){
+        this.acc = JSVector.subGetNew(attractor.loc, this.loc);
+        this.acc.normalize();
+        this.acc.multiply(0.05);
+      } 
+      if(this.loc.distance(attractor.loc)<=100){
+        this.acc = JSVector.subGetNew(this.loc, attractor.loc);
+        this.acc.normalize();
+        this.acc.multiply(0.05);
+      } 
+    }
     this.vel.add(this.acc);
+    this.acc.limit(1)
     this.loc.add(this.vel);
+    this.vel.limit(3);
   }
   
   Mover.prototype.bounce = function () {
@@ -46,12 +62,16 @@ function Mover(x, y, d) {
     }*/
   }
 
-  Mover.prototype.attract = function (v1, v2) {
-    if(v1.distance(v2)==0){
-      
+  /*Mover.prototype.attract = function (vlist) {
+    let change;
+    for(let i = 0; i<vlist.length; i++){
+      if(vlist[i].distance(this.loc)<=50){
+        change = JSVector.subGetNew(this.loc, vlist[i]);
+        change.normalize().multiply(0.25);
+        vlist[i].add(change);
+      }
     }
-    }
-  Mover.prototype.repel = function (v1, v2) {
-    }
+  
+    }*/
   
   
