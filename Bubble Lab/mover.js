@@ -63,9 +63,11 @@ Mover.prototype.overlap = function () {
 
 
 Mover.prototype.update = function () {
-    this.vel.setMagnitude(Math.random()*4-0.5);
+    this.vel.x += Math.random()*4-2;
+    this.vel.y += Math.random()*4-2;
     this.acc.limit(0.75)
     this.loc.add(this.vel);
+    this.vel.add(this.acc);
     this.vel.limit(3);
   }
   
