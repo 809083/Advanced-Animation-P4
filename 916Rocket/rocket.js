@@ -15,7 +15,6 @@ function Rocket(x, y, d) {
 }
   
   Rocket.prototype.render = function () {
-    if(this === rocket1){
     context.save();
     context.translate(this.loc.x, this.loc.y);
     context.rotate(this.vel.getDirection());
@@ -24,28 +23,17 @@ function Rocket(x, y, d) {
     context.lineTo(-20, 10);
     context.lineTo(-10, 0);
     context.lineTo(-20, -10);
-    context.strokeStyle = "black";  // color to fill
-    context.fillStyle = this.clr;     // color to stroke
+    context.strokeStyle = "black"; 
+    context.fillStyle = this.clr; 
     context.fill(); 
     context.restore();
     context.stroke(); 
-    }
-    else{
-    context.save();
-    context.translate(this.loc.x, this.loc.y);
-    context.rotate(this.vel.getDirection());
-    context.beginPath(); 
-    context.arc(0, 0, this.diam, 0, 2*Math.PI);
-    context.strokeStyle = "black";  // color to fill
-    this.clr = '#FF69B4';
-    context.fillStyle = this.clr;     // color to stroke
-    context.fill(); 
-    context.restore();
-    context.stroke(); 
-    }
   }
   
   Rocket.prototype.update = function () {
+    this.acc = JSVector.subGetNew(planet1.loc, this.loc);
+    this.acc.normalize().multiply(0.05);
+    this.vel.limit(3);
     this.vel.add(this.acc);
     this.loc.add(this.vel);
   }
@@ -53,14 +41,12 @@ function Rocket(x, y, d) {
   Rocket.prototype.bounce = function () {
     if(this.loc.y > canvas.height){
       this.loc.y = 0;
-      //this.vel.y = -this.vel.y;
     }
     else if(this.loc.y <0){
       this.loc.y = canvas.height;
     }
     if(this.loc.x >canvas.width){
       this.loc.x = 0;
-      //this.vel.x = -this.vel.x;8/
     }
     else if(this.loc.x <0){
       this.loc.x = canvas.width;

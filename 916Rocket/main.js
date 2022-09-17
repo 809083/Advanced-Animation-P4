@@ -4,7 +4,7 @@ window.addEventListener("load", init);
 // global variables
 let canvas, context;
 let rocket1;
-let planet;
+let planet1;
 
 function init() {
     canvas = document.getElementById("cnv");
@@ -14,14 +14,14 @@ function init() {
     rocket1 = new Rocket(x, y, 15);
     x = Math.random()*canvas.width;
     y = Math.random()*(canvas.height-15);
-    planet = new Rocket(x, y, 30);
+    planet1 = new Planet(x, y, 30);
     animate();      // kick off the animation
 }
 
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     rocket1.run();
-    planet.run();
+    planet1.run();
     requestAnimationFrame(animate); // next cycle
 }
 
