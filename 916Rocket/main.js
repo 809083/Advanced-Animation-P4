@@ -22,7 +22,7 @@ function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     rocket1.run();
     planet1.run();
-    requestAnimationFrame(animate); // next cycle
+   requestAnimationFrame(animate); // next cycle
 }
 
 

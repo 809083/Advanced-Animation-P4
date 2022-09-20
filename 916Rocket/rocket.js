@@ -9,6 +9,7 @@ function Rocket(x, y, d) {
   
   Rocket.prototype.run = function () {
     this.render();
+    this.flames();
     this.update();
     this.bounce();
   }
@@ -28,6 +29,29 @@ function Rocket(x, y, d) {
     context.fill(); 
     context.restore();
     context.stroke(); 
+  }
+
+  Rocket.prototype.flames = function () {
+    let amod //modifier of porportions per acceleration;
+    amod = this.acc.getMagnitude()*10 +0.5;
+    if(this.acc !== 0){
+      context.save();
+      context.translate(this.loc.x, this.loc.y);
+      context.rotate(this.vel.getDirection());
+      context.beginPath(); 
+      context.moveTo(-15, 0);
+      context.lineTo(-30*amod, -10);
+      context.lineTo(-25*amod, -2.5);
+      context.lineTo(-30*amod, 0);
+      context.lineTo(-25*amod, 2.5);
+      context.lineTo(-30*amod, 10);
+      context.strokeStyle = "black"; 
+      let f_color = '#DC143C';
+      context.fillStyle = f_color; 
+      context.fill(); 
+      context.restore();
+      context.stroke(); 
+    }
   }
   
   Rocket.prototype.update = function () {
