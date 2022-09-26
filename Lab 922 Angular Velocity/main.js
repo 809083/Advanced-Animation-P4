@@ -22,7 +22,7 @@ function animate() {
 
 function loadPlanets(n) {
     for(let i = 0; i<n; i++){
-        plist[i] = new Planet(Math.random()*canvas.width, Math.random()*canvas.height, 10, Math.floor(Math.random()*6+1, 50));
+        plist[i] = new Planet(Math.random()*canvas.width, Math.random()*canvas.height, 30, Math.floor(Math.random()*6+1, 50), 30);
     }
 }
 
