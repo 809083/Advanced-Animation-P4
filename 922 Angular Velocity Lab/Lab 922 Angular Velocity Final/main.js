@@ -8,7 +8,7 @@ let plist = [];
 function init() {
     canvas = document.getElementById("cnv");
     context = canvas.getContext("2d");
-    loadPlanets(10);
+    loadPlanets(15);
     animate();      // kick off the animation
 }
 

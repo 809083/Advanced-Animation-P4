@@ -16,19 +16,28 @@ function Orbiter(d, a, o, p) { //x position, y position, diameter, angle, orbit 
 
   
   Orbiter.prototype.render = function () {
-    // context.beginPath(); //line: produces lightning in loop around canvas
-    // context.moveTo(this.loc.x, this.loc.y);
-    // context.lineTo(this.ploc.x, this.ploc.y);
-    // context.strokeStyle = "white";
-    // context.stroke();
-    // context.closePath();
     context.beginPath(); //orbiter
     context.arc(this.loc.x, this.loc.y, this.diam, 0, 2*Math.PI);
     context.strokeStyle = "black"; 
     context.fillStyle = this.clr; 
     context.stroke();
     context.fill();
+    context.closePath(); //*/
+
+    // orbiter w/direction *************************************
+    /*context.save(0);
+    context.translate(this.loc.x, this.loc.y);
+    context.rotate(Math.PI/2 + this.ang); //rewrite later;
+    context.beginPath();
+    context.moveTo(10, 0);
+    context.lineTo(-10, 5);
+    context.lineTo(-10, -5);
+    context.strokeStyle = "black"; 
+    context.fillStyle = this.clr; 
+    context.stroke();
+    context.fill();
     context.closePath();
+    context.restore(); //*/
   }
   
   Orbiter.prototype.update = function () {//does not work at all: must rotate from planet with angle
