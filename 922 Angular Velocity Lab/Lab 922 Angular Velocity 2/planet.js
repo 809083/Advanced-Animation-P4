@@ -10,6 +10,7 @@ function Planet(x, y, d, n, or) { //x value, y value, diameter,
       start+= (Math.PI*2)/(n);
     }
     this.clrlist = ['#065535','#fdd800', '#0b7a85', '#00A36C', '#8b324d', '#c39797', '#9e58c7', '#138808'];
+    this.clrlist2 = ['8f305b', '9C0047','828081', '2A7E43', '727272', '008929', 'AAB700', '9FA838'];
     this.clr = this.clrlist[Math.floor(Math.random()*this.clrlist.length)];
   }
   
@@ -30,6 +31,7 @@ function Planet(x, y, d, n, or) { //x value, y value, diameter,
     context.lineTo(this.loc.x-this.side/2, this.loc.y-this.side/2);
     context.lineTo(this.loc.x+this.side/2, this.loc.y-this.side/2);
     context.lineTo(this.loc.x+this.side/2, this.loc.y+this.side/2);
+    context.closePath();
     context.strokeStyle = "black"; 
     context.fillStyle = this.clr; 
     context.fill(); 

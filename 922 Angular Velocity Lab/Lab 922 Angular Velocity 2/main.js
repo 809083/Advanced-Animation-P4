@@ -9,7 +9,7 @@ function init() {
     canvas = document.getElementById("cnv");
     context = canvas.getContext("2d");
     loadPlanets(15);
-    animate();      // kick off the animation
+    animate();    // kick off the animation
 }
 
 function animate() {
