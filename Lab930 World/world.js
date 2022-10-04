@@ -17,7 +17,7 @@ function World() {
   }
 
   this.movers = [];
-  this.loadMovers();
+  //this.loadMovers();
 
   //Step 1::reduce world to fit inside of mini Canvas
     this.scaleX = this.cnvMini.width/this.cnvMain.width;
@@ -53,11 +53,28 @@ function World() {
 
 // run the world in animation
 World.prototype.run = function () {
+  //ctx.clearRect(this.cnvMainLoc.y, this.cnvMainLoc.x, this.cnvMainLoc.y+this.cnvMain.height, this.cnvMainLoc.x+this.cnvMain.width);
+  
+  let ctx = this.ctxMain;
+  ctx.beginPath();
+  ctx.moveTo(this.dims.left, 0);
+  ctx.lineTo(this.dims.right, 0);
+  ctx.closePath();
+  ctx.lineWidth = 20;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(0, this.dims.top);
+  ctx.lineTo(0, this.dims.bottom);
+  ctx.closePath();
+  ctx.lineWidth = 20;
+  ctx.stroke();
   // Step Two:  Move cnvMain in the world and run movers  ########################################################
   //clear the rectangle in main canvas
-  ctxMain.clearRect(this.cnvMain.top, this.cnvMain.left, this.cnvMain.bottom. this.cnvMain.right);
 
   //  move the main canvas inside of the world
+  ctx.save();
+  ctx.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
+  ctx.restore();
 
   //  scale the world to fit into the miniCanvas
 
