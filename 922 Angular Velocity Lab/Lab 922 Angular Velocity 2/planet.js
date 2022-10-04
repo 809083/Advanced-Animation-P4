@@ -5,7 +5,7 @@ function Planet(x, y, d, n, or) { //x value, y value, diameter,
     this.orbs = [];
     let start = 0;
     for(let i = 0; i<n; i++){
-      this.orbs[i] = new Orbiter(7, start, or, this.loc); // start vector at planet and end at position
+      this.orbs[i] = new Orbiter(7, start, or, this); // start vector at planet and end at position
       //diameter, angle, orbit radius, planet location (takes in JSVector)
       start+= (Math.PI*2)/(n);
     }
@@ -18,8 +18,6 @@ function Planet(x, y, d, n, or) { //x value, y value, diameter,
     this.render();
     this.update();
     for(let i = 0; i<this.orbs.length; i++){
-      this.orbs[i].ploc.x = this.loc.x;
-      this.orbs[i].ploc.y = this.loc.y;
       this.orbs[i].run();
     this.bounce();
     }

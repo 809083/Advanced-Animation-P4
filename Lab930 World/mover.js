@@ -25,8 +25,6 @@ Mover.prototype.checkEdges = function () {
 
 
 Mover.prototype.render = function () {
-   //  render balls in world
    
-   //  render balls in mini map
     
 }
