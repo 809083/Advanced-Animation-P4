@@ -120,10 +120,10 @@ World.prototype.run = function () {
   mini.stroke();
 
   mini.beginPath(); //draws border mini
-  mini.moveTo(this.dims.left, this.dims.top);
-  mini.lineTo(this.dims.left, this.dims.bottom);
-  mini.lineTo(this.dims.right, this.dims.bottom);
-  mini.lineTo(this.dims.right, this.dims.top);
+  mini.moveTo(this.cnvMainLoc.x, this.cnvMainLoc.y);
+  mini.lineTo(this.cnvMainLoc.x, this.cnvMainLoc.y+this.cnvMain.height);
+  mini.lineTo(this.cnvMainLoc.x + this.cnvMain.width, this.cnvMainLoc.y+this.cnvMain.height);
+  mini.lineTo(this.cnvMainLoc.x + this.cnvMain.width, this.cnvMainLoc.y);
   mini.closePath();
   mini.lineWidth = 20;
   mini.stroke();
