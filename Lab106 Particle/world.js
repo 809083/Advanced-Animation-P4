@@ -18,7 +18,7 @@ function World() {
 
 
   this.psystems = [];
-  this.psystems.push(new ParticleSystem(Math.random()*this.cnvMain.width, Math.random()*this.cnvMain.width, this.ctxMain, this.ctxMini, 30));
+  //this.psystems.push(new ParticleSystem(Math.random()*this.cnvMain.width, Math.random()*this.cnvMain.width, this.ctxMain, this.ctxMini, 30));
   //this.loadPSystems();
 
   //Step 1::reduce world to fit inside of mini Canvas
@@ -26,31 +26,14 @@ function World() {
     this.scaleY = this.cnvMini.height/this.dims.height;
     this.cnvMainLoc = new JSVector(0, 0);
 
-      // add an event handler such that the a, s, w, d keys
-      // will reposition the canvas within the world.
-      window.addEventListener("keypress", function (event) {
-        switch (event.code) {
-          //  What is "this" inside of the listener????????????????????
-          case "KeyW":
-            if (world.cnvMainLoc.y + 100 > world.dims.top)
-              world.cnvMainLoc.y -= 20;
-            break;
-          case "KeyS":
-            if (world.cnvMainLoc.y + world.cnvMain.height - 100 < world.dims.bottom)
-              world.cnvMainLoc.y += 20;
-            break;
-          case "KeyA":
-            if (world.cnvMainLoc.x + 100 > world.dims.left)
-              world.cnvMainLoc.x -= 20;
-            break;
-          case "KeyD":
-            if (world.cnvMainLoc.x + world.cnvMain.width - 100 < world.dims.right)
-              world.cnvMainLoc.x += 20;
-            break;
-            break;
-        }
-      }, false);
-}//++++++++++++++++++++++++++++++  end world constructor
+    this.cnvMain.addEventListener("click", function (event) {
+      let cloc = new JSVector(event.offsetX, event.offsetY);
+      cloc.add(world.cnvMainLoc);
+      world.psystems.push(new ParticleSystem(cloc.x, cloc.y, world.ctxMain, world.ctxMini, 30));
+    }, false);
+  
+
+}//++++++++++++++++++++++++++++++  end world 
 
 
 // run the world in animation
@@ -143,11 +126,6 @@ World.prototype.run = function () {
 
   //    outline box inside of cnvMini
 }
-
-//Load mover array
-// World.prototype.loadPSystem = function () {
-//   this.psystems.push(new ParticleSystem(Math.random()*this.dims.width-this.dims.width/2, Math.random()*this.dims.height-this.dims.height/2, 10, this.ctxMain, this.ctxMini, 400));
-// }
 
 World.prototype.getRandomColor = function () {
   //  List of hex color values for movers
