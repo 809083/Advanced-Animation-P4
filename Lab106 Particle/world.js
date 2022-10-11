@@ -18,7 +18,8 @@ function World() {
 
 
   this.psystems = [];
-  this.loadPSystems();
+  this.psystems.push(new ParticleSystem(Math.random()*this.dims.width-this.dims.width/2, Math.random()*this.dims.height-this.dims.height/2, 10, this.ctxMain, this.ctxMini, 400));
+  //this.loadPSystems();
 
   //Step 1::reduce world to fit inside of mini Canvas
     this.scaleX = this.cnvMini.width/this.dims.width;
@@ -144,9 +145,9 @@ World.prototype.run = function () {
 }
 
 //Load mover array
-World.prototype.loadPSystem = function () {
-  //code
-}
+// World.prototype.loadPSystem = function () {
+//   this.psystems.push(new ParticleSystem(Math.random()*this.dims.width-this.dims.width/2, Math.random()*this.dims.height-this.dims.height/2, 10, this.ctxMain, this.ctxMini, 400));
+// }
 
 World.prototype.getRandomColor = function () {
   //  List of hex color values for movers
