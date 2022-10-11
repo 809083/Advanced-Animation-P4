@@ -1,4 +1,4 @@
-function ParticleSystem(x, y, s, ctx1, ctx2, death) { //location of emitter, # of particles to start
+function ParticleSystem(x, y, ctx1, ctx2, death) { //location of emitter, # of particles to start
     this.emitter = new JSVector(x, y);
     this.parList = [];
     this.ctx1 = ctx1;
@@ -10,7 +10,7 @@ ParticleSystem.prototype.run = function(){
     this.parList.push(new Particle(this.emitter, this.death, this.ctx1, this.ctx2));
     this.pdeath();
     for(let i = 0; i<this.parList.length; i++){
-        this.parList[i].run;
+        this.parList[i].run();
     }
 }
 

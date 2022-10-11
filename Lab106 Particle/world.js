@@ -18,7 +18,7 @@ function World() {
 
 
   this.psystems = [];
-  this.psystems.push(new ParticleSystem(Math.random()*this.dims.width-this.dims.width/2, Math.random()*this.dims.height-this.dims.height/2, 10, this.ctxMain, this.ctxMini, 400));
+  this.psystems.push(new ParticleSystem(Math.random()*this.cnvMain.width, Math.random()*this.cnvMain.width, this.ctxMain, this.ctxMini, 30));
   //this.loadPSystems();
 
   //Step 1::reduce world to fit inside of mini Canvas
