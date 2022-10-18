@@ -1,8 +1,8 @@
 // Snake constructor
 
-function Snake(location, numSegs, segLength) {
+function Snake(x, y, numSegs, segLength) {
     //  number of segments, segment length
-    this.loc = location;
+    this.loc = new JSVector(x, y);
     this.numSegs = numSegs;
     this.segLength = segLength;
     this.vel = new JSVector(Math.random()*4-2, Math.random()*4-2);
@@ -14,15 +14,18 @@ function Snake(location, numSegs, segLength) {
 Snake.prototype.loadSegments = function () {
     let ploc = new JSVector(this.loc.x, this.loc.y);
     for(let i = 0; i<this.numSegs; i++){
-        this.segments[i] = new JSVector(ploc, this.vel.setMagnitude(this.segLenth)); //potential error
-        ploc.x = this.segments[i].x;
-        ploc.y = this.segments[i].y;
+        let vel2 = new JSVector(this.vel.x, this.vel.y);
+        vel2.setMagnitude(this.segLength);
+        let vec = JSVector.addGetNew(ploc, vel2);
+        this.segments.push(vec); //potential error
+        ploc = new JSVector(vec.x, vec.y);
     }
+    console.log(this.segments);
 
 }
 
 Snake.prototype.run = function () {
-    this.update();
+    //this.update();
     this.render();
 
 }
@@ -31,7 +34,7 @@ Snake.prototype.update = function () {
     let nvel;
     this.loc.add(this.vel);
     for(let i = 0; i<this.segments.length; i++){
-        nvel = JSVector.subGetNew(this.loc.x - this.segments[i].x, this.loc.y - this.segments[i].y);
+        nvel = JSVector.subGetNew(this.loc.x - this.segments[i].x, this.loc.y - this.segments[i].y); //needs vectors also not right dont use velocity
         this.segments[i].add(nvel);
     }
 
@@ -39,7 +42,7 @@ Snake.prototype.update = function () {
 
 Snake.prototype.render = function () {
     world.ctx.beginPath();
-    world.ctx.arc(this.loc.x, this.loc.y, 7, 0, 2 * Math.PI); 
+    world.ctx.arc(this.loc.x, this.loc.y, 14, 0, 2 * Math.PI); 
     world.ctx.strokeStyle = "black";  
     world.ctx.fillStyle = this.clr;   
     world.ctx.fill(); 
