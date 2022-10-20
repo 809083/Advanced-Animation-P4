@@ -8,7 +8,7 @@ function Snake(x, y, numSegs, segLength) {
     this.vel = new JSVector(Math.random()*4-2, Math.random()*4-2);
     this.segments = [];
     this.loadSegments();
-    this.clr = "red";
+    this.clr = "lime";
     this.hrad = 14;
 }
 
@@ -32,34 +32,53 @@ Snake.prototype.run = function () {
 
 }
 
+
 Snake.prototype.update = function () {
-    this.loc.add(this.vel);
-    for(let i = 0; i<this.segments.length; i++){
-        let temp = new JSVector(this.segments[i].x, this.segments[i].y);
-        temp = JSVector.subGetNew(temp, this.loc);
-        temp.limit(this.vel.getMagnitude());
-        temp.multiply(-1);
-        this.segments[i].add(temp); //find way to guarantee seperation between each ball such that they maintain seperation of segLength
-    }
-
-
+    Snake.prototype.update = function () {
+        this.loc.add(this.vel);
+        let temp;
+        let ploc = new JSVector(this.loc.x, this.loc.y);
+        let dis;
+        for(let i = 0; i<this.segments.length; i++){
+            temp= new JSVector(this.segments[i].x, this.segments[i].y);
+            temp = JSVector.subGetNew(temp, ploc);
+            temp.limit(this.vel.getMagnitude());
+            temp.multiply(-1);
+            this.segments[i].add(temp);
+            dis = this.segments[i].distance(ploc);
+            if(dis<this.segLength){
+                temp.setMagnitude(this.segLength-dis);
+                this.segments[i].sub(temp); 
+            }
+                ploc = this.segments[i];
+            }
+        }
 }
 
+
 Snake.prototype.render = function () {
-    world.ctx.beginPath();
-    world.ctx.arc(this.loc.x, this.loc.y, this.hrad, 0, 2 * Math.PI); 
-    world.ctx.strokeStyle = "black";  
-    world.ctx.fillStyle = this.clr;   
-    world.ctx.fill(); 
-    world.ctx.stroke(); 
+    let ploc = new JSVector(this.loc.x, this.loc.y);
     for(let i = 0; i<this.segments.length; i++){
         world.ctx.beginPath();
+        world.ctx.moveTo(ploc.x, ploc.y);
+        world.ctx.lineTo(this.segments[i].x, this.segments[i].y);
+        world.ctx.strokeStyle = this.clr;
+        world.ctx.stroke();
+        world.ctx.closePath();
+        ploc = new JSVector(this.segments[i].x, this.segments[i].y);
+        world.ctx.beginPath();
         world.ctx.arc(this.segments[i].x, this.segments[i].y, 4, 0, 2 * Math.PI); 
-        world.ctx.strokeStyle = "black";  
-        world.ctx.fillStyle = this.clr;   
+        world.ctx.strokeStyle = this.clr;  
+        world.ctx.fillStyle = "black";   
         world.ctx.fill(); 
-        world.ctx.stroke(); 
+        world.ctx.stroke();
     }
+    world.ctx.beginPath();
+    world.ctx.arc(this.loc.x, this.loc.y, this.hrad, 0, 2 * Math.PI); 
+    world.ctx.strokeStyle = this.clr;  
+    world.ctx.fillStyle = "black";   
+    world.ctx.fill(); 
+    world.ctx.stroke(); 
 
 }
 
