@@ -21,7 +21,6 @@ Snake.prototype.loadSegments = function () {
         this.segments.push(vec); //potential error
         ploc = new JSVector(vec.x, vec.y);
     }
-    console.log(this.segments);
 
 }
 
@@ -59,12 +58,10 @@ Snake.prototype.update = function () {
 Snake.prototype.render = function () {
     let ploc = new JSVector(this.loc.x, this.loc.y);
     for(let i = 0; i<this.segments.length; i++){
-        world.ctx.beginPath();
         world.ctx.moveTo(ploc.x, ploc.y);
         world.ctx.lineTo(this.segments[i].x, this.segments[i].y);
         world.ctx.strokeStyle = this.clr;
         world.ctx.stroke();
-        world.ctx.closePath();
         ploc = new JSVector(this.segments[i].x, this.segments[i].y);
         world.ctx.beginPath();
         world.ctx.arc(this.segments[i].x, this.segments[i].y, 4, 0, 2 * Math.PI); 
@@ -72,6 +69,7 @@ Snake.prototype.render = function () {
         world.ctx.fillStyle = "black";   
         world.ctx.fill(); 
         world.ctx.stroke();
+        world.ctx.closePath();
     }
     world.ctx.beginPath();
     world.ctx.arc(this.loc.x, this.loc.y, this.hrad, 0, 2 * Math.PI); 
@@ -79,6 +77,7 @@ Snake.prototype.render = function () {
     world.ctx.fillStyle = "black";   
     world.ctx.fill(); 
     world.ctx.stroke(); 
+    world.ctx.closePath();
 
 }
 

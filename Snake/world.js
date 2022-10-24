@@ -4,7 +4,6 @@ function World(){
     this.ctx = this.canvas.getContext("2d");
     for( let i = 0; i < numSnakes; i++){
         snakes[i] = new Snake(Math.random()*this.canvas.width, Math.random()*this.canvas.height, 10, 15);
-        console.log(snakes[i]);
     }
    
 }
