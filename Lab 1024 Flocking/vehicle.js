@@ -55,7 +55,12 @@ Vehicle.prototype.separate = function (v) {
       sum.add(v[i]).loc;
     }
   }
+  if(inc != 0){
   sum.divide(inc);
+  }
+  else{
+    sum = new JSVector(0, 0);
+  }
   let separationForce = sum;
   return separationForce;
 }
@@ -70,7 +75,12 @@ Vehicle.prototype.align = function (v) {
       sum.add(v[i]).vel;
     }
   }
-  sum.divide(inc);
+  if(inc != 0){
+    sum.divide(inc);
+    }
+    else{
+      sum = new JSVector(0, 0);
+    }
   let steeringForce = sum;
   return steeringForce;
 }
@@ -85,7 +95,12 @@ Vehicle.prototype.cohesion = function (v) {
       sum.add(v[i]).loc;
     }
   }
-  sum.divide(inc);
+  if(inc != 0){
+    sum.divide(inc);
+    }
+    else{
+      sum = new JSVector(0, 0);
+    }
   let cohesionForce = sum;
   return cohesionForce;
 }
