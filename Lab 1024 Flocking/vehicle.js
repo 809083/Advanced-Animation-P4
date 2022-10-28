@@ -52,11 +52,12 @@ Vehicle.prototype.separate = function (v) {
     if(dis>0 && dis< this.desiredSep){
       inc++;
       let temp = JSVector.subGetNew(v[i].loc, this.loc);
-      sum.add(v[i]).loc;
+      sum.add(v[i].loc);
     }
   }
   if(inc != 0){
   sum.divide(inc);
+  console.log("sep" + sum);
   }
   else{
     sum = new JSVector(0, 0);
@@ -72,7 +73,7 @@ Vehicle.prototype.align = function (v) {
     let dis = this.loc.distance(v[i].loc);
     if(dis>0 && dis< 100){ //make variable later
       inc++;
-      sum.add(v[i]).vel;
+      sum.add(v[i].vel);
     }
   }
   if(inc != 0){
@@ -92,11 +93,12 @@ Vehicle.prototype.cohesion = function (v) {
     let dis = this.loc.distance(v[i].loc);
     if(dis>0 && dis< 100){ //make variable later
       inc++;
-      sum.add(v[i]).loc;
+      sum.add(v[i].loc);
     }
   }
   if(inc != 0){
     sum.divide(inc);
+    console.log("coh " + sum); //sum undefined
     }
     else{
       sum = new JSVector(0, 0);
