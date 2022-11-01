@@ -84,7 +84,7 @@ Vehicle.prototype.align = function () {
   let inc = 0;
   for(let i = 0; i<v.length; i++){
     let dis = this.loc.distance(v[i].loc);
-    if(dis>0 && dis< 100){ //make variable later
+    if(dis>0 && dis< this.desiredCoh){ //make variable later
       inc++;
       sum.add(v[i].vel);
     }
