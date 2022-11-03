@@ -7,7 +7,8 @@ function Vehicle(loc) {
   this.acc = new JSVector(0, 0);
  
   this.clr = "rgba(180,0,220,.8)";
-  
+  this.maxSpeed = document.getElementById("slider2").value;  // %%%%%%%%%%%%%%%%%
+  this.maxForce = document.getElementById("slider1").value;
   //############################################################################# not attached to slider
   this.desiredSep = 30;//  desired separation between vehicles
   this.scl = 3;
@@ -29,12 +30,12 @@ Vehicle.prototype.flock = function(vehicles) {
   let sep = this.separate();
   let ali = this.align();
   let coh = this.cohesion();
-  //  set multiples via sliders 
+  //  set multiples via sliders
+  this.maxSpeed = document.getElementById("slider2").value;  // %%%%%%%%%%%%%%%%%
+  this.maxForce = document.getElementById("slider1").value;  // %%%%%%%%%%%%%%%%%
   let sepMult = document.getElementById("slider3").value; // %%%%%%%%%%%%%%%%%%
   let aliMult = document.getElementById("slider4").value;;  // %%%%%%%%%%%%%%%%%%
   let cohMult = document.getElementById("slider5").value;;    // %%%%%%%%%%%%%%%%%%
-  this.maxSpeed = document.getElementById("slider2").value;  // %%%%%%%%%%%%%%%%%
-  this.maxForce = document.getElementById("slider1").value;  // %%%%%%%%%%%%%%%%%
   //  calculate three forces
   sep.multiply(sepMult);
   ali.multiply(aliMult);
@@ -67,7 +68,8 @@ Vehicle.prototype.separate = function () {
        }
     }
     
-    if(count !== 0){
+    if(count != 0){
+      sum.divide(count);
       sum.normalize();
       sum.multiply(this.maxSpeed);
       steer = JSVector.subGetNew(sum, this.vel);
@@ -83,8 +85,8 @@ Vehicle.prototype.align = function () {
   let sum = new JSVector(0,0);
   let inc = 0;
   for(let i = 0; i<v.length; i++){
-    let dis = this.loc.distance(v[i].loc);
-    if(dis>0 && dis< this.desiredCoh){ //make variable later
+    let dis = this.loc.distanceSquared(v[i].loc);
+    if(dis>0 && dis< this.desiredCoh*this.desiredCoh){ //make variable later
       inc++;
       sum.add(v[i].vel);
     }
@@ -118,7 +120,7 @@ Vehicle.prototype.cohesion = function () {
        }
     }
     
-    if(count !== 0){
+    if(count != 0){
       sum.divide(count);
       sum.normalize();
       sum.multiply(this.maxSpeed);
@@ -144,11 +146,18 @@ Vehicle.prototype.seek = function(target) {
 //+++++++++++++++++++++++++++++++++  Flocking functions
 
 Vehicle.prototype.update = function () {
+  this.flock();
   this.acc.limit(this.maxForce);
   this.vel.add(this.acc);
-  this.acc.multiply(0);
-  this.vel.limit(this.maxSpeed);
+  this.acc = new JSVector();
+  this.vel.limit(1);
   this.loc.add(this.vel);
+
+  // this.acc.limit(this.maxForce);
+  // this.vel.add(this.acc);
+  // this.acc.multiply(0);
+  // this.vel.limit(this.maxSpeed);
+  // this.loc.add(this.vel);
 }
 
 Vehicle.prototype.checkEdges = function () {
