@@ -7,8 +7,7 @@ function Vehicle(loc) {
   this.acc = new JSVector(0, 0);
  
   this.clr = "rgba(180,0,220,.8)";
-  this.maxSpeed = document.getElementById("slider2").value;  // %%%%%%%%%%%%%%%%%
-  this.maxForce = document.getElementById("slider1").value;  // %%%%%%%%%%%%%%%%%
+  
   //############################################################################# not attached to slider
   this.desiredSep = 30;//  desired separation between vehicles
   this.scl = 3;
@@ -34,6 +33,8 @@ Vehicle.prototype.flock = function(vehicles) {
   let sepMult = document.getElementById("slider3").value; // %%%%%%%%%%%%%%%%%%
   let aliMult = document.getElementById("slider4").value;;  // %%%%%%%%%%%%%%%%%%
   let cohMult = document.getElementById("slider5").value;;    // %%%%%%%%%%%%%%%%%%
+  this.maxSpeed = document.getElementById("slider2").value;  // %%%%%%%%%%%%%%%%%
+  this.maxForce = document.getElementById("slider1").value;  // %%%%%%%%%%%%%%%%%
   //  calculate three forces
   sep.multiply(sepMult);
   ali.multiply(aliMult);
@@ -67,14 +68,13 @@ Vehicle.prototype.separate = function () {
     }
     
     if(count !== 0){
-      sum.divide(count);
       sum.normalize();
       sum.multiply(this.maxSpeed);
       steer = JSVector.subGetNew(sum, this.vel);
       steer.limit(this.maxForce)
     }
-  let separationForce = steer;
-  return separationForce;
+
+  return steer;
 }
 
 //align
@@ -144,8 +144,10 @@ Vehicle.prototype.seek = function(target) {
 //+++++++++++++++++++++++++++++++++  Flocking functions
 
 Vehicle.prototype.update = function () {
+  this.acc.limit(this.maxForce);
   this.vel.add(this.acc);
-  this.vel.limit(1);
+  this.acc.multiply(0);
+  this.vel.limit(this.maxSpeed);
   this.loc.add(this.vel);
 }
 
