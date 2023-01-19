@@ -5,4 +5,10 @@ function FarBack(x){
 
 FarBack.prototype.run = function(){
     this.loc.y //update to add velocity;
+    this.render();
 }
+
+FarBack.prototype.render = function(){
+    
+}
+
