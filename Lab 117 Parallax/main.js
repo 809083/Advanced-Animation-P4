@@ -1,7 +1,7 @@
 
 
 // global variables for canvas and context
-var game, canvas, ctx, back, h1, platforms;
+var game, canvas, ctx, back, h1, platforms, t1;
 window.onload = init;//  After the window has been loaded, go to init
 
 function init(){
@@ -34,6 +34,7 @@ function init(){
   platforms[10] = new Platform(1100 + p, 320, 75);
 
   h1;//hero
+  t1 = new Trap(); //trap
   animate();
 }
 
@@ -49,6 +50,7 @@ function animate(){
     platforms[i].run();
     
   }
+  t1.run();
 
   requestAnimationFrame(animate);
 }

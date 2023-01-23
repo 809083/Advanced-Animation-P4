@@ -34,3 +34,6 @@ Hero.prototype.jump = function(){
     //listener
 }
 
+Hero.prototype.die = function(){
+    //if hero touches trap, dies
+}
