@@ -5,15 +5,29 @@ function MidBack(x){
 }
 
 MidBack.prototype.run = function(){
-    this.loc.y //update to add velocity;
+    this.loc.x += this.vel;
     this.render();
+    this.cycle();
 }
 
 MidBack.prototype.render = function(){
+    let context = ctx;
     context.beginPath();
-    context.fillRect(this.loc.x, this.loc.y, canvas.width, canvas.height/2); 
-    context.fillStyle = this.clr;
     context.strokeStyle = "black";
+    context.fillStyle = this.clr;
+    context.moveTo(this.loc.x, this.loc.y);
+    context.lineTo(this.loc.x + canvas.width, this.loc.y);
+    context.lineTo(this.loc.x + canvas.width, this.loc.y+ canvas.height/2);
+    context.lineTo(this.loc.x, this.loc.y + canvas.height/2);
+    //context.fillRect(this.loc.x, this.loc.y, canvas.width, canvas.height/2); 
+    context.fill();
+    context.stroke();
     context.closePath();
+}
+
+MidBack.prototype.cycle = function(){
+    if(this.loc.x > canvas.width){
+        this.loc.x = -canvas.width;
+    }
 }
 
