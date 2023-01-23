@@ -1,6 +1,6 @@
 function MidBack(x){
     this.loc = new JSVector(x, canvas.height/2); //choose y
-    this.vel = 1;
+    this.vel = -1/2;
     this.clr = "green";
 }
 
@@ -26,8 +26,8 @@ MidBack.prototype.render = function(){
 }
 
 MidBack.prototype.cycle = function(){
-    if(this.loc.x > canvas.width){
-        this.loc.x = -canvas.width;
+    if(this.loc.x + canvas.width < 0){
+        this.loc.x = canvas.width;
     }
 }
 

@@ -1,6 +1,6 @@
 function FarBack(x){
     this.loc = new JSVector(x, 0); //choose y
-    this.vel = 0.5;
+    this.vel = -0.5/2;
     this.clr = "blue";
 }
 
@@ -26,8 +26,8 @@ FarBack.prototype.render = function(){
 }
 
 FarBack.prototype.cycle = function(){
-    if(this.loc.x > canvas.width){
-        this.loc.x = -canvas.width;
+    if(this.loc.x + canvas.width < 0){
+        this.loc.x = canvas.width;
     }
 }
 

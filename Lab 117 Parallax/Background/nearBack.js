@@ -1,6 +1,6 @@
 function NearBack(x){
     this.loc = new JSVector(x, 2*canvas.height/3); //choose y
-    this.vel = 1.5;
+    this.vel = -1.5/2;
     this.clr = "yellow";
 }
 
@@ -27,8 +27,8 @@ NearBack.prototype.render = function(){
 }
 
 NearBack.prototype.cycle = function(){
-    if(this.loc.x > canvas.width){
-        this.loc.x = -canvas.width;
+    if(this.loc.x + canvas.width < 0){
+        this.loc.x = canvas.width;
     }
 }
 

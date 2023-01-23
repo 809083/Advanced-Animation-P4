@@ -34,11 +34,3 @@ Hero.prototype.jump = function(){
     //listener
 }
 
-Hero.prototype.left = function(){
-    //listener
-}
-
-Hero.prototype.right = function(){
-    //listener
-}
-
