@@ -1,11 +1,17 @@
 function Platform(x, y, s){ // loc from upper left corner and size
+    this.initialX = x;
     this.loc = new JSVector(x, y); 
     this.size = s;
+    this.vel = -1;
     this.clr = "brown";
 }
 
 Platform.prototype.run = function(){
     this.render();
+    this.loc.x += this.vel;
+    if(this.loc.x + this.size < 0){
+        this.loc.x = canvas.width + 104 - this.size;
+    }
     //this.stopChar(); character not coded yet
 }
 

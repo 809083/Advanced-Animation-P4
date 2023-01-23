@@ -21,16 +21,17 @@ function init(){
   back[5] = new NearBack(-canvas.width);
   platforms = [];
   let p = canvas.width/2; //adjustment from initial set-up
-  platforms[0] = new Platform(0 + p, 200, 100);
-  platforms[1] = new Platform(150 + p, 250, 50);
+  platforms[0] = new Platform(0 + p, 285, 100);
+  platforms[1] = new Platform(150 + p, 260, 50);
   platforms[2] = new Platform(250 + p, 300, 100);
   platforms[3] = new Platform(400 + p, 270, 75);
   platforms[4] = new Platform(550 + p, 280, 25);
   platforms[5] = new Platform(600 + p, 310, 25);
   platforms[6] = new Platform(650 + p, 340, 25);
-  platforms[7] = new Platform(700 + p, 400, 50);
-  platforms[8] = new Platform(800 + p, 375, 75);
-  platforms[9] = new Platform(950 + p, 320, 200);
+  platforms[7] = new Platform(700 + p, 375, 50);
+  platforms[8] = new Platform(800 + p, 330, 100);
+  platforms[9] = new Platform(950 + p, 300, 120);
+  platforms[10] = new Platform(1100 + p, 320, 75);
 
   h1;//hero
   animate();
@@ -46,7 +47,9 @@ function animate(){
   }
   for(let i = 0; i<platforms.length; i++){
     platforms[i].run();
+    
   }
+
   requestAnimationFrame(animate);
 }
 
