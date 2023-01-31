@@ -16,6 +16,8 @@ function init() {
 
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = "20px serif";
+    context.fillText("q = new poly, space = new ints, w = poly answer, e = int product, r = 2 digit factors, t = 3 digit factors", canvas.width/2-350, 50);
     context.font = "100px serif";
     let adj = 0;
     if(tag == 2){
