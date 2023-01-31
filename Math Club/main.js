@@ -34,13 +34,13 @@ function animate() {
 
 window.addEventListener("keypress", function (event) {
     switch (event.code) {
-      case "KeyA":
+      case "KeyE":
         if(tag == 1){
         let temp = a*b;
         c = "Product: " + temp;
         }
         break;
-      case "KeyB":
+      case "KeyR":
         if(tag == 1){
         let temp2 = [];
         let n = b + 0;
@@ -68,7 +68,7 @@ window.addEventListener("keypress", function (event) {
         }
     }
         break;
-    case "KeyC":
+    case "KeyT":
         if(tag == 1){
         let temp3 = [];
         let n2 = a + 0;
@@ -92,7 +92,7 @@ window.addEventListener("keypress", function (event) {
         }
     }
         break;
-        case "KeyD":
+        case "KeyQ":
             c = "";
             b = ""
             tag = 2;
@@ -140,7 +140,7 @@ window.addEventListener("keypress", function (event) {
             a = temp4[0] + "x^2" + " " + temp4[3] + temp4[1] + temp4[4] + temp4[2];
 
             break;
-        case "KeyE":
+        case "KeyW":
             if(tag == 2){
                 c = "x = " + d + "  x = " + e;
             }
