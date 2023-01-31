@@ -20,6 +20,10 @@ function animate() {
     let adj = 0;
     if(tag == 2){
         adj = 100;
+        document.body.style.backgroundColor = "#0e79dd";
+    }
+    else{
+        document.body.style.backgroundColor = "#ddc80e";
     }
     context.fillText(a + "   " + b, canvas.width/2-150-adj, canvas.height/2)
     context.font = "75px serif";
@@ -105,6 +109,12 @@ window.addEventListener("keypress", function (event) {
                 co = Math.trunc(Math.random()*10-5);
             }
             let temp4 = [co, -(d+e)*co, co*d*e, "+", "+"]
+            if(co == 1){
+                temp4[0] = "";
+            }
+            if(co == -1){
+                temp4[0] = "-";
+            }
             if(temp4[1] < 0){
                 temp4[3] = "";
                 if(temp4[1] == -1){
@@ -127,7 +137,7 @@ window.addEventListener("keypress", function (event) {
             if(temp4[2] < 0){
                 temp4[4] = "";
             }
-            a = co + "x^2" + " " + temp4[3] + temp4[1] + temp4[4] + temp4[2];
+            a = temp4[0] + "x^2" + " " + temp4[3] + temp4[1] + temp4[4] + temp4[2];
 
             break;
         case "KeyE":
