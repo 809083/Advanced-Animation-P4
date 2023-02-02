@@ -1,0 +1,23 @@
+body{
+   background-color: #9A9A9A;
+   margin:0;
+   margin-left: 20px;
+   margin-right: 20px;
+ }
+
+#wrapperDiv{
+ height: 800px;
+ width: 900px;
+ margin:auto;
+ margin-top: 20px;
+
+}
+
+img{
+  border: solid lightskyblue 2px;
+  margin: 10px;
+}
+
+h1{
+  /*color*/
+}
