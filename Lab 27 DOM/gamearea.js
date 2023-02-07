@@ -1,16 +1,25 @@
 function GameArea(){
     //  Wrapper Div
     this.wrapperDiv = document.getElementById("wrapperDiv");
-    this.wrapperDiv.setAttribute("style", " background-color:yellow; border: 5px solid black; width:1100px; height:800px;");
+    this.wrapperDiv.setAttribute("style", " background-color:yellow; border: 5px solid black; width:1200px; height:800px;");
     // create tileMenuDiv
+
+    this.tileMenuDivL = document.createElement("div");
+    this.wrapperDiv.appendChild(this.tileMenuDivL)
+    this.tileMenuDivL.setAttribute("style", " background-color:#27273F; width:100px; height:696px; float:left;");
+
     this.tileMenuDiv = document.createElement("div");
     this.wrapperDiv.appendChild(this.tileMenuDiv)
-    this.tileMenuDiv.setAttribute("style", " background-color:#FFFFFF; width:1100px; height:100px;float:left;");
+    this.tileMenuDiv.setAttribute("style", " background-color:#27273F; width:1100px; height:100px;float:left;");
+
+    this.tileMenuDivR = document.createElement("div");
+    this.wrapperDiv.appendChild(this.tileMenuDivR)
+    this.tileMenuDivR.setAttribute("style", " background-color:#27273F; width:100px; height:696px; float:right;");
 
     // create canvasDiv
     this.canvasDiv = document.createElement("div");
     this.wrapperDiv.appendChild(this.canvasDiv)
-    this.canvasDiv.setAttribute("style", " background-color:pink; width:1100px; height:700px;float:left;");
+    this.canvasDiv.setAttribute("style", " background-color:pink; width:1100px; height:700px;float:top;");
 
     // place canvas in div and style
     this.canvasDiv.appendChild(canvas);
