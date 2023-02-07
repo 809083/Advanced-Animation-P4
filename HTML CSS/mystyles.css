@@ -13,11 +13,22 @@ body{
 
 }
 
+
 img{
   border: solid lightskyblue 2px;
   margin: 10px;
 }
 
 h1{
-  /*color*/
+  color: #242e5a;
+  background-color: azure;
 }
+
+h2{
+  color: #391463;
+}
+
+h4{
+  color: #0e3446;
+}
+
