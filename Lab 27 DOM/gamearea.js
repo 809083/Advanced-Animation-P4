@@ -34,6 +34,25 @@ function GameArea(){
        //this.t1Text.style.padding = "10px";
        this.tiles[i].appendChild(this.tileText[i]);
     }
+    //right
+    for(let i = 0; i < 6; i++){
+      this.tiles[i] = document.createElement("div");
+      this.tileMenuDivR.appendChild(this.tiles[i]);
+      this.tiles[i].setAttribute("class", "tile"); //floating doesn't seem to be working
+      this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
+      //this.t1Text.style.padding = "10px";
+      this.tiles[i].appendChild(this.tileText[i]);
+   }
+   //left
+   for(let i = 0; i < 6; i++){
+    this.tiles[i] = document.createElement("div");
+    this.tileMenuDivL.appendChild(this.tiles[i]);
+    this.tiles[i].setAttribute("class", "tile");
+    this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
+    //this.t1Text.style.padding = "10px";
+    this.tiles[i].appendChild(this.tileText[i]);
+ }
+    this.wrapperDiv.appendChild(this.canvasDiv);
 
     //  Add listeners to tile objects
     for(let i = 0; i < this.tiles.length; i++){
