@@ -29,8 +29,11 @@ function GameArea(){
     //  create tiles for tile menu
     this.tiles = [];
     this.tileText = [];
+    this.count = 0;
+    this.iCount;
     //top
     for(let i = 0; i < 7; i++){
+      this.iCount = i;
        this.tiles[i] = document.createElement("div");
        this.tileMenuDiv.appendChild(this.tiles[i]);
        this.tiles[i].setAttribute("class", "tile");
@@ -38,23 +41,29 @@ function GameArea(){
        //this.t1Text.style.padding = "10px";
        this.tiles[i].appendChild(this.tileText[i]);
     }
-    //right
+    this.count+=(this.iCount+1);
     for(let i = 0; i < 5; i++){
-      this.tiles[i] = document.createElement("div");
-      this.tileMenuDivR.appendChild(this.tiles[i]);
-      this.tiles[i].setAttribute("class", "tileV"); //floating doesn't seem to be working
-      this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
+      this.cat = "https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwxNDk0OTAwfHxlbnwwfHx8fA%3D%3D&w=1000&q=80";
+      this.iCount = i;
+      this.tiles[i+this.count] = document.createElement("div");
+      this.tileMenuDivR.appendChild(this.tiles[i+this.count]);
+      this.tiles[i+this.count].setAttribute("class", "tileV"); //floating doesn't seem to be working
+      this.imgR = document.createElement("IMG");
+      this.imgR.setAttribute("src", this.cat);
+      this.imgR.setAttribute("width", "50");
+      this.imgR.setAttribute("height", "50")
+      this.tiles[i+this.count].appendChild(this.imgR);
       //this.t1Text.style.padding = "10px";
-      this.tiles[i].appendChild(this.tileText[i]);
    }
+   this.count+=(this.iCount+1);
    //left
    for(let i = 0; i < 5; i++){
-    this.tiles[i] = document.createElement("div");
-    this.tileMenuDivL.appendChild(this.tiles[i]);
-    this.tiles[i].setAttribute("class", "tileV");
-    this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
-    //this.t1Text.style.padding = "10px";
-    this.tiles[i].appendChild(this.tileText[i]);
+    this.tiles[i+this.count] = document.createElement("div");
+      this.tileMenuDivL.appendChild(this.tiles[i+this.count]);
+      this.tiles[i+this.count].setAttribute("class", "tileV"); //floating doesn't seem to be working
+      this.tileText[i+this.count] = document.createTextNode("Text here");
+      //this.t1Text.style.padding = "10px";
+      this.tiles[i+this.count].appendChild(this.tileText[i+this.count]);
  }
     //this.wrapperDiv.appendChild(this.canvasDiv);
 
