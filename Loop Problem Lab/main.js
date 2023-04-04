@@ -1,12 +1,14 @@
 
-var n = 5;
+var n = 100;
 var arr;
 window.onload = init;
 
 function init(){
     arr = loadPrisArray(n);
     console.log(arr);
-    console.log(getClosedLoop(4))
+    console.log(getClosedLoop(4, arr))
+    console.log(runPrisoners(arr));
+    console.log(testProbability(1000, n));
 }
 
 function loadPrisArray(n){
@@ -24,7 +26,7 @@ function loadPrisArray(n){
     return ret;
 }
 
-function getClosedLoop(a){
+function getClosedLoop(a, arr){
     let counter = 1;
     let current = arr[a];
     let target = a;
@@ -35,10 +37,24 @@ function getClosedLoop(a){
     return counter;
 }
 
-function runPrisoners(){ //run as many times as the length of the loop
+function runPrisoners(arr){
+    for(let i = 0; i < arr.length; i++){
+        if(getClosedLoop(i, arr) > arr.length/2){
+            return false;
+        }
+    }
+    return true;
 
 }
 
-function testProbability(t){ // t = number of times
-
+function testProbability(t, n){ // t = number of times
+    let arr2;
+    let win = 0;
+    for(let i = 0; i<t; i++){
+        arr2 = loadPrisArray(n);
+        if(runPrisoners(arr2)){
+            win++;
+        }
+    }
+    return "You won " + win + " times of " + t + " or " + 100*win/t + "% of the time";
 }
